@@ -1,8 +1,8 @@
 // This is the path where ooriginal images are stored.
-String originalPath = "/home/hitesh/Projects/vertx/ImageTransformations/queue-verticle/web/images"
+String originalPath = "${System.getProperty('user.home')}/Desktop/vertx-imagetransformation/queue-verticle/web/images"
 
 // This is the path where updated images would be stored..
-String updatedPath = "/home/hitesh/Projects/vertx/ImageTransformations/queue-verticle/web/updatedImages"
+String updatedPath = "${System.getProperty('user.home')}/Desktop/vertx-imagetransformation/queue-verticle/web/updatedImages"
 
 List list = [
 ['name':'2-1-ac.jpg','transformation':'sepia','originalPath':originalPath,'updatedPath':updatedPath],
