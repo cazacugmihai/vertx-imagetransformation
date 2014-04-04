@@ -6,14 +6,6 @@ def queueConf = [
         "collection": "process.queue"
 ]
 
-
-def incomingQueue = [
-        "address": "vert-x.messages.queue",
-        "persistor_address": 'vertx.mongopersistor',
-        "collection": "messages.queue"
-]
-
-
 container.with {
     deployModule('vertx.mongo-persistor-v1.2', ["db_name": "queue_list"], 1) {
         println "Mongo in place."
@@ -22,14 +14,9 @@ container.with {
             println "Queue started..."
 
             // Delete existing data from Queue
-            eb.send(queueConf['persistor_address'], ['action': 'delete', 'collection': queueConf['collection'], 'matcher': [:]])
-        }
-
-        deployModule('vertx.work-queue-v1.2', incomingQueue, 1) {
-            println "Incoming queue started..."
-
-            // Delete existing data from Queue
-            eb.send(incomingQueue ['persistor_address'], ['action': 'delete', 'collection': incomingQueue ['collection'], 'matcher': [:]])
+            eb.send(
+                queueConf['persistor_address'], 
+                ['action': 'delete', 'collection': queueConf['collection'], 'matcher': [:]])
         }
     }
 
